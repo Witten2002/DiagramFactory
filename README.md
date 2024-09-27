@@ -95,7 +95,12 @@ The DiagramFactory library provides a range of configuration options that allow 
   })
 ```
 
-## Methods
+## Usage
+1. Install the lib.
+2. Setup a svg element.
+3. Set up a config for the lib.
+4. Call the metod to create the diagram you want.
+   
 BarDiagram
 ```javascript
 diagramFactory.createBarDiagram()
