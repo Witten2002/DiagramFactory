@@ -122,6 +122,8 @@ Here is an example of how to create a `bar` diagram with interactivity and anima
 ```
 
 ```javascript
+  import { DiagramFactory } from './lib/DiagramFactory/DiagramFactory'
+
   const diagramFactory = new DiagramFactory({
     elementId: '#svgDiagram',
     data: [
