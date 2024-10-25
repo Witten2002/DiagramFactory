@@ -93,7 +93,7 @@ This module primmarily relies on built-in browser features and the SVG (Scalable
 The DiagramFactory library is written in `JavaScript` (ES6) and utilizes modern language features such as classes, arrow functions, and template literals. It is designed to be compatible with modern web browsers and can be easily integrated into web applications using ES6 modules.
 
 ## Version
-The current version of the DiagramFactory library is `1.0.0`. Future updates and enhancements may be released to improve functionality, performance, and compatibility with different browsers and devices. In future versions, additional diagram types and customization options may be added to provide more flexibility and control over the visualizations.
+The current version of the DiagramFactory library is `2.0.0`. Future updates and enhancements may be released to improve functionality, performance, and compatibility with different browsers and devices. In future versions, additional diagram types and customization options may be added to provide more flexibility and control over the visualizations.
 
 This project uses **Semantic Versioning**. Each version follows the format:
 
