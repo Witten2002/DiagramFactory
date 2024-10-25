@@ -22,27 +22,24 @@ class Diagram {
    */
   constructor (config) {
     this.#setDataObject(config)
-    this.#setSvg(this.#dataObject.getDataObject().config.svg)
-    this.#setsvgHeight(this.#svg)
-    this.#setsvgWidth(this.#svg)
+    this.#setSvg()
+    this.#setsvgHeight()
+    this.#setsvgWidth()
   }
 
   /**
    * Sets the svg element.
-   *
-   * @param {object} svg - The svg element.
    */
-  #setSvg (svg) {
-    this.#svg = svg
+  #setSvg () {
+    this.#svg = this.#dataObject.getDataObject().config.svg
   }
 
   /**
    * Sets the heigt of the element.
-   *
-   * @param {object} svg - Svg Element.
    */
-  #setsvgHeight (svg) {
-    this.#svgHeight = svg.getAttribute('height')
+  #setsvgHeight () {
+    this.#svgHeight = this.#dataObject.getDataObject().config.height
+    this.#svg.setAttribute('height', this.#svgHeight)
   }
 
   /**
@@ -56,11 +53,10 @@ class Diagram {
 
   /**
    * Sets the width of the element.
-   *
-   * @param {object} svg - Svg Element.
    */
-  #setsvgWidth (svg) {
-    this.#svgWidth = svg.getAttribute('width')
+  #setsvgWidth () {
+    this.#svgWidth = this.#dataObject.getDataObject().config.width
+    this.#svg.setAttribute('width', this.#svgWidth)
   }
 
   /**
@@ -88,6 +84,7 @@ class Diagram {
    */
   #setDataObject (config) {
     this.#dataObject = new DataObject(config)
+    this.#dataObject.createObject()
   }
 
   /**
@@ -117,24 +114,16 @@ class Diagram {
     const objectData = this.getDataObject()
 
     if (objectData.config.interactivity) {
-      console.log(objectData.config.interactivity)
       const interactive = new Interactivity(config.element)
-      interactive.makeInteractive(objectData, config.visualData, config.type)
+      interactive.makeInteractive(objectData, config)
     }
 
     if (objectData.config.animation) {
       const animate = new Animation(config.element)
 
-      const animationConfig = {
-        element: config.element,
-        type: config.type,
-        finalHeight: config.finalHeight,
-        finalY: config.finalY,
-        speed: objectData.config.animation.speed,
-        initialPoints: config.initialPoints,
-        finalPoints: config.finalPoints
-      }
-      animate.animation(animationConfig)
+      const speed = objectData.config.animation.speed
+
+      animate.startAnimation(config, speed)
     }
   }
 

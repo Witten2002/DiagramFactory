@@ -1,27 +1,37 @@
 # DiagramFactory
 
 ## Description
-The DiagramFactory library is a tool designed to create dynamic and interactive diagrams based on user-provided data. It utilizes SVG (Scalable Vector Graphics) to render high-quality, scalable visualizations that maintain clarity and responsiveness across different screen sizes.
+The DiagramFactory library allows users to create dynamic and interactive diagrams using SVG (Scalable Vector Graphics). It supports:
 
-The library supports a variety of diagram types, including:
+- **Bar Diagrams** (horizontal and vertical) for comparing categorical data.
+- **Line Diagrams** for showing trends over time.
+- **Circle Diagrams** (Pie Charts) for visualizing proportional data.
 
-- Line Diagrams for visualizing trends and data progression over time.
-- Circle Diagrams (Pie Charts) for representing proportions or percentage distributions.
-- Bar Diagrams (both horizontal and vertical) for comparing categorical data.
+The library is fully customizable with options for colors, labels, animations, and interactivity, making it a great solution for data visualization in web applications.
 
-With its flexible configuration options, the DiagramFactory library allows developers to customize colors, labels, animations, and interactive elements, making it easy to tailor the diagrams to specific design and functional requirements. This makes it an ideal solution for integrating visually engaging data representations into web applications.
+<img src="./img/Bar.png" alt="Example Diagram" width="300" height="200">
+<img src="./img/Line.png" alt="Example Diagram" width="300" height="200">
+<img src="./img/Circle.png" alt="Example Diagram" width="300" height="200">
+
 
 ## Installation
-Download the DiagramFactory library from the GitHub repository and include it in your lib directory on the client. You need to add the following html element in your html file:
+1. Clone the repository or download the DiagramFactory library.
+
+2. Include the library in your project:
 ```html
   <svg id="svgDiagram" width="600" height="400"></svg>
 ```
 
-You can then import the library into your JS file using a relative path:
+3. Import the library into your JavaScript file:
 ```javascript
-import { DiagramFactory } from './lib/DiagramFactory/DiagramFactory'
+import { DiagramFactory } from './lib/DiagramFactory/DiagramFactory.js'
 ```
-After the lib is imported you can create a new instance of the DiagramFactory class and pass the configuration object as an argument:The minimum configuration object requires the elementId property, which specifies the ID of the SVG element where the diagram will be rendered. And the data you want to visualize as an array.
+## Usage Example
+1. Heres a complete example of creating a Bar Diagram with interactivity and animation:
+```html
+<svg id="svgDiagram" width="600" height="400"></svg>
+```
+
 ```javascript
 const diagramFactory = new DiagramFactory({
   elementId: '#svgDiagram',
@@ -29,123 +39,52 @@ const diagramFactory = new DiagramFactory({
     { label: 'A', value: 10, color: 'blue' },
     { label: 'B', value: 20, color: 'red' },
     { label: 'C', value: 100, color: 'green' },
-    { label: 'D', value: 40, color: 'yellow' },
-    { label: 'E', value: 120, color: 'purple' },
-    { label: 'F', value: 96, color: 'orange' },
-    { label: 'G', value: 130, color: 'cyan' }
-  ]
+    { label: 'D', value: 40, color: 'yellow' }
+  ],
+  interactivity: {
+    expand: true,
+    infoBoxWhenHover: true
+  },
+  animation: {
+    speed: 100
+  },
+  decoration: {
+    showGrid: false
+  }
 })
-```
-You can then call the create diagram method to render the diagram based on the provided data and configuration:
 
-If you want to create a line diagram you can call the createLineDiagram method:
-```javascript
-diagramFactory.createLineDiagram()
-```
-If you want to create a circle diagram you can call the createCircleDiagram method:
-```javascript
-diagramFactory.createCircleDiagram()
-```
-If you want to create a bar diagram you can call the createBarDiagram method:
-```javascript
 diagramFactory.createBarDiagram()
 ```
-## Setting up config
-The DiagramFactory library provides a range of configuration options that allow you to customize the appearance and behavior of the diagrams. The following properties can be included in the configuration object when creating a new instance of the DiagramFactory class:
 
-#### Required properties:
-- `elementId`: The ID of the SVG element where the diagram will be rendered. Need to be an svg element.
-- `data`: An array of objects representing the data to be visualized. Each object should have the following properties:
-  - `label`: A string representing the label or category associated with the data point.
-  - `value`: A number representing the value or size of the data point.
-  - `color`: A string representing the color of the data point. This can be a named color (e.g., 'red', 'blue', 'green').
-
-#### Optional properties:
-- `interactivity`: **Currently not working with circleDiagrams.**
-  - `expand`: A boolean value that determines whether the diagram elements should expand when hovered over. Default is `false`.
-  - `infoBoxWhenHover`: A boolean value that determines whether an info box should be displayed when hovering over a diagram element. Default is `false`.
-- `animation`: **As things stand BarDiagram is the only diagram that can be animated.**
-  - `speed`: A number representing the animation speed in milliseconds. Default is `100`.
-- `decoration`:
-  - `showGrid`: A boolean value that determines whether a grid should be displayed in the background of the diagram. Default is `true`.
-
-  Example of a configuration object with optional properties:
-```javascript
-  const diagramFactory = new DiagramFactory({
-    elementId: '#svgDiagram',
-    data: [
-      { label: 'A', value: 10, color: 'blue' },
-      { label: 'B', value: 20, color: 'red' },
-      { label: 'C', value: 100, color: 'green' },
-      { label: 'D', value: 40, color: 'yellow' },
-      { label: 'E', value: 120, color: 'purple' },
-      { label: 'F', value: 96, color: 'orange' },
-      { label: 'G', value: 130, color: 'cyan' }
-    ],
-    interactivity: {
-      expand: true,
-      infoBoxWhenHover: true
-    },
-    animation: {
-      speed: 100
-    },
-    decoration: {
-      showGrid: false
-    }
-  })
-```
-
-## Usage
-1. Install the lib.
-2. Setup a svg element.
-3. Set up a config for the lib.
-4. Call the metod to create the diagram you want.
-   
-BarDiagram
-```javascript
-diagramFactory.createBarDiagram()
-```
-LineDiagram
-```javascript
-diagramFactory.createLineDiagram()
-```
-CircleDiagram
+You can easily switch the diagram type:
 ```javascript
 diagramFactory.createCircleDiagram()
+diagramFactory.createLineDiagram()
 ```
 
-## Code example
-Here is an example of how to create a `bar` diagram with interactivity and animation using the DiagramFactory library:
+## Configuration Options
+### Required:
+- **elementId**: The ID of the SVG element where the diagram will be rendered.
+- **data**: An array of objects representing the data points, each with:
+  - ``label``: The category or label of the data.
+  - ``value``: The numerical value of the data point.
+  - ``color``: The color for that data point.
 
-```html
-  <svg id="svgDiagram" width="600" height="400"></svg>
-```
+### Optional:
+- **interactivity**:
+  - ``expand``: Boolean, if true, elements expand when hovered.
+  - ``infoBoxWhenHover``: Boolean, if true, displays an info box on hover.
+- **animation**:
+  - ``speed``: Sets the animation speed (ms).
+- **decoration**:
+  - ``showGrid``: Boolean, shows grid lines in the background if true.
 
-```javascript
-  import { DiagramFactory } from './lib/DiagramFactory/DiagramFactory'
+## Screenshots
 
-  const diagramFactory = new DiagramFactory({
-    elementId: '#svgDiagram',
-    data: [
-      { label: 'A', value: 10, color: 'blue' },
-      { label: 'B', value: 20, color: 'red' },
-      { label: 'C', value: 100, color: 'green' },
-      { label: 'D', value: 40, color: 'yellow' },
-      { label: 'E', value: 120, color: 'purple' },
-      { label: 'F', value: 96, color: 'orange' },
-      { label: 'G', value: 130, color: 'cyan' }
-    ],
-    interactivity: {
-      expand: true,
-      infoBoxWhenHover: true
-    },
-    animation: {
-      speed: 100
-    }
-  })
+<img src="./img/Bar.gif" alt="Example Diagram" width="300" height="200">
+<img src="./img/Line.gif" alt="Example Diagram" width="300" height="200">
+<img src="./img//circle.gif" alt="Example Diagram" width="300" height="200">
 
-  diagramFactory.createBarDiagram()
-```
 
 ## Dependencies
 This module primmarily relies on built-in browser features and the SVG (Scalable Vector Graphics) standard for rendering the diagrams. It does not have any external dependencies or require additional libraries to function.
@@ -172,6 +111,8 @@ For more information about Semantic Versioning, visit [SemVer.org](https://semve
 |----------|-------------|--------|----------|---------|
 | BUG001 | The CircleDiagram does not have the ability to expand. | open | minor | Requires update to interaction logic |
 | BUG002 | The Labels does not fit good with the circle diagram when the space is to small | open | minor | Suggest resizing or using smaller labels |
+| BUG003 | The CircleDiagram will not render when only one data has been added | open | m | - |
+
 
 
 We welcome all users to submit issues for bug reports, feature requests, or general feedback. Please visit our [GitHub Issues page](https://github.com/Witten2002/DiagramFactory/issues) to create a new issue or comment on an existing one.

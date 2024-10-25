@@ -25,7 +25,7 @@ class DiagramFactory {
   /**
    * Render the HorizontalBarDiagram and place it in the DOM.
    */
-  createBarDiagram () {
+  displayBarDiagram () {
     try {
       const horizontalBarDiagram = new HorizontalBarDiagram(this.#config)
       horizontalBarDiagram.render()
@@ -37,7 +37,7 @@ class DiagramFactory {
   /**
    * Render the LineDiagram and place it in the DOM.
    */
-  createLineDiagram () {
+  displayLineDiagram () {
     try {
       const lineDiagram = new LineDiagram(this.#config)
       lineDiagram.render()
@@ -49,7 +49,7 @@ class DiagramFactory {
   /**
    * Render the Circlediagram and place it in the DOM.
    */
-  createCircleDiagram () {
+  displayCircleDiagram () {
     try {
       const circleDiagram = new CircleDiagram(this.#config)
       circleDiagram.render()
